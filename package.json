@@ -1,0 +1,24 @@
+{
+  "name": "shortest-route",
+  "version": "0.0.3",
+  "description": "Pass a list of cities in a pipe(|) character separated format and you will get the shortest route.",
+  "main": "distanceapi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarun29061990/shortest-route.git"
+  },
+  "keywords": [
+    "distancematrix",
+    "api",
+    "google"
+  ],
+  "author": "Tarun Chaudhary (http://curioustechie.in)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarun29061990/shortest-route/issues"
+  },
+  "homepage": "https://github.com/tarun29061990/shortest-route"
+}
