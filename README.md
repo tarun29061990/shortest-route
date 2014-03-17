@@ -26,9 +26,9 @@ npm install shortest-route;
 Quick Start
 -----------
 ```sh
-var shortest-route = require("shortest-route");
+var shortest_route = require("shortest-route");
 var city_list = "A|B|C";
-shortest-route.getShortPath(city_list, function(route){
+shortest_route.getShortPath(city_list, function(route){
     console.log(route);
 });
 ```
