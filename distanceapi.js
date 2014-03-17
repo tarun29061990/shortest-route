@@ -70,8 +70,7 @@ function calculateDistance(source, destination, callback){
 	};
 
 	var req = http.request(options, function(res1) {
-		console.log('STATUS: ' + res1);
-		console.log('HEADERS: ' + JSON.stringify(res1.headers));
+		
 	  	var body = "";
 	  	res1.on('data', function (chunk) {
 	    	body += chunk.toString('utf8');
