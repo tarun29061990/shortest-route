@@ -27,7 +27,7 @@ Quick Start
 -----------
 ```sh
 var shortest-route = require("shortest-route");
-var city_list = "A|B|C"
+var city_list = "A|B|C";
 shortest-route.getShortPath(city_list, function(route){
     console.log(route);
 });
