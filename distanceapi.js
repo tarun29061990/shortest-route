@@ -1,5 +1,5 @@
 var http = require("http");
-exports.smartDistanceHandler = function(source, callback){
+exports.getShortPath = function(source, callback){
 	var source = source;
 	var _carr = source.split("|"),
 		_carrlen = _carr.length,
