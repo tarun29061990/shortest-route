@@ -52,7 +52,7 @@ exports.getShortPath = function(source, callback){
 				city = city+(_chashT[shortestPath[i]])+"|";
 			}
 			city = city.split("|").slice(0,_carrlen).toString().split(",").join("|");
-			callback(city);
+			callback(city, dist[0]);
 		});
 	});
 

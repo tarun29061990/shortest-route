@@ -13,7 +13,9 @@
   "keywords": [
     "distancematrix",
     "api",
-    "google"
+    "google",
+    "shortestpath",
+    "shortestroute"
   ],
   "author": "Tarun Chaudhary (http://curioustechie.in)",
   "license": "ISC",
