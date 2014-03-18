@@ -1,7 +1,7 @@
 Shortest-route
 ==============
 
-Pass a list of cities in a pipe separated format and get the shortest route and the distance corresponding to that route. Shortest route means if you are goin to city A and then to city B and then to city C. So your input will be A|B|C and it will give you the shortest route. For example if you are covering less kilometers between A to C then to B then your shortest route will be A|C|B. I used google distance matrix api to calculate the distance between cities.
+Pass a list of cities in a pipe separated format and get the shortest route and the distance corresponding to that route. Shortest route means if you are goin to city A and then to city B and then to city C (So your input will be A|B|C) then this module will give you the shortest route. For example if you are covering less kilometers between A to C then to B then your shortest route will be A|C|B. I used google distance matrix api to calculate the distance between cities.
 
 Explanation
 -----------
@@ -28,11 +28,25 @@ Quick Start
 ```sh
 var shortestRoute = require("shortest-route");
 var cityList = "A|B|C"
-shortestRoute.getShortPath(cityList, function(route, distance){
-    console.log(route+"-"+distance);
+shortestRoute.getShortPath(cityList, function(json){
+    console.log("data="+json);
 });
-```
 
+Output:-
+
+data = {
+    "STATUS":"SUCCESS",
+	"route":"A|C|B",
+	"distance":XXX
+}
+
+and in case of an Error (Most probably a bad request)
+data={
+	"STATUS":400,
+	"route":null,
+	"distance":null
+}
+```
 Demo
 ----
 A simple demo http://short-route-demo.herokuapp.com/. Enter city names and get the shortest path and distance related to that path.

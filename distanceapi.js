@@ -26,36 +26,66 @@ exports.getShortPath = function(source, callback){
 		ax.push(arr[i].toString().split(","));
 	}
 
-	calculateDistance(source,source,function(json){
-		makeSmartObj(json,function(arr1){
-			
 
-			var dist = [];
-			var hashTableDist = {};
-			
-			for(var i=0;i<nooffact;i++){
-				var a = 0;
-				for(var j=0; j< (_carrlen); j++){
+	calculateDistance(source,source,function(json){
+		if(json !== "Error"){
+			makeSmartObj(json,function(arr1){
+		
+
+				var dist = [];
+				var hashTableDist = {};
+				
+				
+				for(var i=0;i<nooffact;i++){
+					var a = 0;
+					for(var j=0; j<= (_carrlen); j++){
+						if(j===_carrlen)
+							a = a + arr1[parseInt(ax[i][j])-1][parseInt(ax[i][j+1])-1];
+						else
+							a = a + arr1[parseInt(ax[i][j])-1][parseInt(ax[i][j+1])-1];
+					}
+					dist.push(a);
+					hashTableDist[dist[i]] = arr[i];
 					
-					a = a + arr1[parseInt(ax[i][j])-1][parseInt(ax[i][j+1])-1];
 				}
-				dist.push(a);
-				hashTableDist[dist[i]] = arr[i];
+				
+				dist = dist.sort(function(a,b){return (a-b);});
+				var shortestPath = hashTableDist[dist[0]];
+				shortestPath = shortestPath.toString().split(",");
+				
+				var city = "";
+				for(var i=1; i<shortestPath.length-1 ; i++){
+					city = city+(_chashT[shortestPath[i]])+"|";
+				}
+				city = city.split("|").slice(0,_carrlen).toString().split(",").join("|");
+				var data = {
+					"STATUS":"SUCCESS",
+					"route":city,
+					"distance":dist[0]
+				}
+				callback(data);
+			});
+		}else{
+			var data = {
+				"STATUS":400,
+				"route":null,
+				"distance":null
 			}
+			callback(data);
+		}
 			
-			dist = dist.sort(function(a,b){return (a-b);});
-			var shortestPath = hashTableDist[dist[0]];
-			shortestPath = shortestPath.toString().split(",");
-			
-			var city = "";
-			for(var i=1; i<shortestPath.length-1 ; i++){
-				city = city+(_chashT[shortestPath[i]])+"|";
-			}
-			city = city.split("|").slice(0,_carrlen).toString().split(",").join("|");
-			callback(city, dist[0]);
-		});
 	});
 
+}
+
+function IsJson(str) {
+    try {
+        JSON.parse(str);
+        
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 function calculateDistance(source, destination, callback){
@@ -77,8 +107,12 @@ function calculateDistance(source, destination, callback){
 	  	});
 
 	  	res1.on('end', function(){
-	  		body = JSON.parse(body);
 	  		
+	  		if(IsJson(body))
+	  			body = JSON.parse(body);
+	  		else
+	  			body = "Error";
+
 	  		callback(body);
 	  	});
 	  	
@@ -97,7 +131,8 @@ function makeSmartObj(body, callback){
 			var x = new Array(body.rows[i].elements.length);
 			ar.push(x);
 			for(var j = 0; j<body.rows[i].elements.length ; j++){
-				ar[i][j] = body.rows[i].elements[j].distance.value;
+				if(body.rows[i].elements[j].distance)
+					ar[i][j] = body.rows[i].elements[j].distance.value;
 			}
 		}
 		callback(ar);
