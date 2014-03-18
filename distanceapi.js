@@ -25,7 +25,12 @@ exports.getShortPath = function(source, callback){
 		
 		ax.push(arr[i].toString().split(","));
 	}
-
+	var b = [];
+	for(var i=0;i<ax.length;i++){
+   		if(ax[i][1] === "1"){
+           b.push(ax[i]);    
+        }
+    }
 
 	calculateDistance(source,source,function(json){
 		if(json !== "Error"){
@@ -34,15 +39,15 @@ exports.getShortPath = function(source, callback){
 
 				var dist = [];
 				var hashTableDist = {};
+				var _blen = b.length;
 				
-				
-				for(var i=0;i<nooffact;i++){
+				for(var i=0;i<_blen;i++){
 					var a = 0;
 					for(var j=0; j<= (_carrlen); j++){
 						if(j===_carrlen)
-							a = a + arr1[parseInt(ax[i][j])-1][parseInt(ax[i][j+1])-1];
+							a = a + arr1[parseInt(b[i][j])-1][parseInt(b[i][j+1])-1];
 						else
-							a = a + arr1[parseInt(ax[i][j])-1][parseInt(ax[i][j+1])-1];
+							a = a + arr1[parseInt(b[i][j])-1][parseInt(b[i][j+1])-1];
 					}
 					dist.push(a);
 					hashTableDist[dist[i]] = arr[i];
@@ -54,10 +59,14 @@ exports.getShortPath = function(source, callback){
 				shortestPath = shortestPath.toString().split(",");
 				
 				var city = "";
-				for(var i=1; i<shortestPath.length-1 ; i++){
+				var len = shortestPath.length -1;
+				for(var i=1; i<len ; i++){
 					city = city+(_chashT[shortestPath[i]])+"|";
 				}
-				city = city.split("|").slice(0,_carrlen).toString().split(",").join("|");
+				
+				city = city+(_chashT[1]);
+				
+				city = city.split("|").slice(0,_carrlen+1).toString().split(",").join("|");
 				var data = {
 					"STATUS":"SUCCESS",
 					"route":city,
@@ -67,7 +76,7 @@ exports.getShortPath = function(source, callback){
 			});
 		}else{
 			var data = {
-				"STATUS":400,
+				"STATUS":"Error 400 BAD REQUEST",
 				"route":null,
 				"distance":null
 			}

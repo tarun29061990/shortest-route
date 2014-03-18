@@ -1,7 +1,7 @@
 Shortest-route
 ==============
 
-Pass a list of cities in a pipe separated format and get the shortest route and the distance corresponding to that route. Shortest route means if you are goin to city A and then to city B and then to city C (So your input will be A|B|C) then this module will give you the shortest route. For example if you are covering less kilometers between A to C then to B then your shortest route will be A|C|B. I used google distance matrix api to calculate the distance between cities.
+Pass a list of cities in a pipe separated format and get the shortest route and the distance corresponding to that route. Shortest route means "shortest possible route that visits each city exactly once and returns to the origin city", so if you are goin to city A and then to city B and then to city C (your input will be A|B|C) then this module will give you the shortest route. For example if you are covering less kilometers between A to C then to B then your shortest route will be A|C|B|A (A to C to B then back to A). I used google distance matrix api to calculate the distance between cities.
 
 Explanation
 -----------
@@ -36,7 +36,7 @@ Output:-
 
 data = {
     "STATUS":"SUCCESS",
-	"route":"A|C|B",
+	"route":"A|C|B|A",
 	"distance":XXX
 }
 
